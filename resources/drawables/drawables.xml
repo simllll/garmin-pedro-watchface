@@ -1,0 +1,16 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="HeartIcon" filename="heart-icon.png" packingFormat="png"/>
+    <bitmap id="MountainIcon" filename="mountain-icon.png" packingFormat="png"/>
+    <bitmap id="BatteryIcon" filename="battery.png" packingFormat="png"/>
+    <bitmap id="KCalIcon" filename="kcal.png" packingFormat="png"/>
+    <bitmap id="StepsIcon" filename="steps.png" packingFormat="png"/>
+    <bitmap id="earlybirds" filename="Early Birds Wings orange 1x1.png" packingFormat="png"/>
+        
+    <bitmap id="DoNotDisturbIcon" filename="donotdisturb.png">
+        <palette>
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    
+</drawables>
