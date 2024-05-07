@@ -12,6 +12,8 @@ Includes a digital and analog watch face.
 Download in Garmin Connect IQ Store fore free:
 https://apps.garmin.com/apps/f148c8ff-8c37-4237-b0ae-4ad5e1bf98b5
 
+If you like it, feel free to buy me a coffee: https://buymeacoffee.com/siml
+
 # Learnings
 ## Handle Low Memory Devices
 * seconds update / partial updates only on 1/4 of the screen (or indivudal size), do not ues a full second layer (see Version 3)
