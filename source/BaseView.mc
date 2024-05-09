@@ -1,9 +1,3 @@
-//
-// Copyright 2016-2021 by Garmin Ltd. or its subsidiaries.
-// Subject to Garmin SDK License Agreement and Wearables
-// Application Developer Agreement.
-//
-
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.Math;
@@ -15,8 +9,6 @@ import Toybox.Application.Storage;
 
 var _animationCompleted = true;
 
-//! This implements an analog watch face
-//! Original design by Austen Harbour
 class BaseWatchFace extends WatchUi.WatchFace {
     private var animationLayer as WatchUi.AnimationLayer or Null = null; // pedro animation
     private var clockLayer as AnalogClockViewLayer or DigitalClockViewLayer or Null = null; // watch face
@@ -27,7 +19,6 @@ class BaseWatchFace extends WatchUi.WatchFace {
 
     private var _initializedWatchMode;
 
-    //! Initialize variables for this view
     public function initialize() {
         WatchFace.initialize();
 
@@ -43,22 +34,20 @@ class BaseWatchFace extends WatchUi.WatchFace {
         _initializedWatchMode = WatchSettings.mode;
 
         insertLayer(clockLayer, 1);
-        clockLayerTop = clockLayer.getSecondsView();
-        if (clockLayerTop) {
-            insertLayer(clockLayerTop, 2);
+        if (_partialUpdatesAllowed) {
+            clockLayerTop = clockLayer.getSecondsView();
+            if (clockLayerTop != null) {
+                insertLayer(clockLayerTop, 2);
+            }
         }
     }
 
-    //! Configure the layout of the watchface for this device
-    //! @param dc Device context
     public function onLayout(dc as Dc) as Void {
         if (lowMemoryDevice == false && WatchSettings.overlay == true) {
             initWatchFace(dc);
         }
     }
 
-    //! Handle the update event
-    //! @param dc Device context
     public function onUpdate(dc as Dc) as Void {
         if (clockLayer != null && _initializedWatchMode != WatchSettings.mode) {
             // if watch face mode changed, re init
@@ -77,6 +66,9 @@ class BaseWatchFace extends WatchUi.WatchFace {
                 initWatchFace(dc);
             }
             clockLayer.setDrawBackground(true);
+            if (clockLayerTop != null) {
+                clockLayerTop.setVisible(true);
+            }
             _animationCompleted = false;
         }
         
@@ -92,8 +84,6 @@ class BaseWatchFace extends WatchUi.WatchFace {
         }
     }
 
-    //! Handle the partial update event
-    //! @param dc Device context
     public function onPartialUpdate(dc as Dc) as Void {
         // handle onPartialUpdate
         if (clockLayer != null && clockLayerTop != null) {
@@ -109,13 +99,13 @@ class BaseWatchFace extends WatchUi.WatchFace {
     // The user has just looked at their watch.
     // Time to trigger the start of the animation.
     function onExitSleep() {
-      System.println("onExitSleep()");
+      // System.println("onExitSleep()");
       
       _isAwake = true;
       
-      if (clockLayerTop != null) {
+      /* if (clockLayerTop != null) {
         clockLayerTop.setVisible(true);
-      }
+      }*/
 
       if (WatchSettings.autoplay) {
         doAnimation();
@@ -129,9 +119,9 @@ class BaseWatchFace extends WatchUi.WatchFace {
       
       _isAwake = false;
       
-      if (clockLayerTop != null) {
+      /* if (clockLayerTop != null) {
         clockLayerTop.setVisible(false);
-      }
+      }*/
 
       // System.println("onEnterSleep()");
       WatchUi.requestUpdate();
@@ -173,6 +163,10 @@ class BaseWatchFace extends WatchUi.WatchFace {
 
         if (clockLayer != null) {
             clockLayer.setDrawBackground(false);
+        }
+
+        if (clockLayerTop != null) {
+            clockLayerTop.setVisible(false);
         }
 
         _animationCompleted = false;

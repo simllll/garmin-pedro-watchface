@@ -122,41 +122,41 @@ class SettingsMenuDelegate extends WatchUi.Menu2InputDelegate {
             }
             case "datafields": {
                 var menu = new WatchUi.Menu2({:title=>"datafields"});
-                datafield0MenuItem = new WatchUi.MenuItem("datafield Left", WatchSettings.datafield[0], "datafield0", {});
+                datafield0MenuItem = new WatchUi.MenuItem("Data Field Left", WatchSettings.datafield[0], "datafield0", {});
                 menu.addItem(datafield0MenuItem);
-                datafield1MenuItem = new WatchUi.MenuItem("datafield Right", WatchSettings.datafield[1], "datafield1", {});
+                datafield1MenuItem = new WatchUi.MenuItem("Data Field Right", WatchSettings.datafield[1], "datafield1", {});
                 menu.addItem(datafield1MenuItem);
-                datafield2MenuItem = new WatchUi.MenuItem("datafield Top", WatchSettings.datafield[2], "datafield2", {});
+                datafield2MenuItem = new WatchUi.MenuItem("Data Field Top", WatchSettings.datafield[2], "datafield2", {});
                 menu.addItem(datafield2MenuItem);
-                datafield3MenuItem = new WatchUi.MenuItem("datafield Bottom", WatchSettings.datafield[3], "datafield3", {});
+                datafield3MenuItem = new WatchUi.MenuItem("Data Field Bottom", WatchSettings.datafield[3], "datafield3", {});
                 menu.addItem(datafield3MenuItem);
 
                 WatchUi.pushView(menu, new SettingsMenuDelegate(), WatchUi.SLIDE_IMMEDIATE);
                 break;
             }
             case "datafield0": {
-                var menu = new WatchUi.Menu2({:title=>"datafield Left"});
+                var menu = new WatchUi.Menu2({:title=>"Data Field Left"});
                 addDataFieldSubEntries(menu);
                 
                 WatchUi.pushView(menu, new DatafieldMenuDelegate(0), WatchUi.SLIDE_IMMEDIATE);
                 break;
             }
             case "datafield1": {
-                var menu = new WatchUi.Menu2({:title=>"datafield Right"});
+                var menu = new WatchUi.Menu2({:title=>"Data Field Right"});
                addDataFieldSubEntries(menu);
                 
                 WatchUi.pushView(menu, new DatafieldMenuDelegate(1), WatchUi.SLIDE_IMMEDIATE);
                 break;
             }
             case "datafield2": {
-                var menu = new WatchUi.Menu2({:title=>"datafield Top"});
+                var menu = new WatchUi.Menu2({:title=>"Data Field Top"});
                 addDataFieldSubEntries(menu);
                 
                 WatchUi.pushView(menu, new DatafieldMenuDelegate(2), WatchUi.SLIDE_IMMEDIATE);
                 break;
             }
             case "datafield3": {
-                var menu = new WatchUi.Menu2({:title=>"datafield Bottom"});
+                var menu = new WatchUi.Menu2({:title=>"Data Field Bottom"});
                 addDataFieldSubEntries(menu);
                 
                 WatchUi.pushView(menu, new DatafieldMenuDelegate(3), WatchUi.SLIDE_IMMEDIATE);
