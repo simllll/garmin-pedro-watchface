@@ -74,15 +74,15 @@ class Datafields {
         return currentHeartrate.format("%d");
     }
     
-    private function enoughMemory() {
+    private function enoughMemory(datafield as Number) {
         if (lowMemoryDevice) {
             // only allow 2 icons on low memory devices
-            var cnt = (_datafield_icon[0] != null ? 1 : 0) +
-                (_datafield_icon[1] != null ? 1 : 0) + 
-                (_datafield_icon[2] != null ? 1 : 0) +
-                (_datafield_icon[3] != null ? 1 : 0);
+            var cnt = (datafield != 0 && _datafield_icon[0] != null ? 1 : 0) +
+                (datafield != 1 && _datafield_icon[1] != null ? 1 : 0) + 
+                (datafield != 2 && _datafield_icon[2] != null ? 1 : 0) +
+                (datafield != 3 && _datafield_icon[3] != null ? 1 : 0);
 
-            System.println("enoughMemory: " + cnt);
+            // System.println("enoughMemory: " + cnt);
 
             if (cnt >= 2) {
                 return false;
@@ -95,7 +95,7 @@ class Datafields {
         switch(WatchSettings.datafield[datafield]) {
             case WatchSettings.DataFieldHeartRate:
                 if (_datafield_loaded_icon[datafield] != WatchSettings.DataFieldHeartRate) {
-                    _datafield_icon[datafield] = enoughMemory() ? WatchUi.loadResource($.Rez.Drawables.HeartIcon) as BitmapResource : null;
+                    _datafield_icon[datafield] = enoughMemory(datafield) ? WatchUi.loadResource($.Rez.Drawables.HeartIcon) as BitmapResource : null;
                     _datafield_loaded_icon[datafield] = WatchSettings.DataFieldHeartRate;
                 }
                 return getHeartrate();
@@ -107,19 +107,19 @@ class Datafields {
                 return getWeatherTemperature();
             case WatchSettings.DataFieldBattery:
                 if (_datafield_loaded_icon[datafield] != :battery) {
-                    _datafield_icon[datafield] = enoughMemory() ? WatchUi.loadResource($.Rez.Drawables.BatteryIcon) as BitmapResource : null;
+                    _datafield_icon[datafield] = enoughMemory(datafield) ? WatchUi.loadResource($.Rez.Drawables.BatteryIcon) as BitmapResource : null;
                     _datafield_loaded_icon[datafield] = :battery;
                 }
                 return getBattery();
             case WatchSettings.DataFieldCalories:
                 if (_datafield_loaded_icon[datafield] != :calories) {
-                    _datafield_icon[datafield] = enoughMemory() ? WatchUi.loadResource($.Rez.Drawables.KCalIcon) as BitmapResource : null;
+                    _datafield_icon[datafield] = enoughMemory(datafield) ? WatchUi.loadResource($.Rez.Drawables.KCalIcon) as BitmapResource : null;
                     _datafield_loaded_icon[datafield] = :calories;
                 }
                 return getCalories();
             case WatchSettings.DataFieldSteps:
                 if (_datafield_loaded_icon[datafield] != :steps) {
-                    _datafield_icon[datafield] = enoughMemory() ? WatchUi.loadResource($.Rez.Drawables.StepsIcon) as BitmapResource : null;
+                    _datafield_icon[datafield] = enoughMemory(datafield) ? WatchUi.loadResource($.Rez.Drawables.StepsIcon) as BitmapResource : null;
                     _datafield_loaded_icon[datafield] = :steps;
                 }
                 return getSteps();
@@ -131,7 +131,7 @@ class Datafields {
                 return getTimeToRecovery();
             case WatchSettings.DataFieldElevation:
                 if (_datafield_loaded_icon[datafield] != :elevation) {
-                    _datafield_icon[datafield] = enoughMemory() ? WatchUi.loadResource($.Rez.Drawables.MountainIcon) as BitmapResource : null;
+                    _datafield_icon[datafield] = enoughMemory(datafield) ? WatchUi.loadResource($.Rez.Drawables.MountainIcon) as BitmapResource : null;
                     _datafield_loaded_icon[datafield] = :elevation;
                 }
                 return getElevation();

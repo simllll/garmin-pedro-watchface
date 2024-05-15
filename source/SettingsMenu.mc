@@ -30,7 +30,7 @@ class SettingsMenu extends WatchUi.Menu2 {
             Menu2.addItem(new WatchUi.ToggleMenuItem("Show Watch during pedro", null, "overlay", WatchSettings.overlay, null));
         }
 
-        Menu2.addItem(new WatchUi.ToggleMenuItem("Auto Play", null, "autoplay", WatchSettings.autoplay, null));
+        Menu2.addItem(new WatchUi.ToggleMenuItem("Auto Play (Play On Motion)", null, "autoplay", WatchSettings.autoplay, null));
     }
 }
 

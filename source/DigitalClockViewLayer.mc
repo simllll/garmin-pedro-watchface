@@ -51,30 +51,23 @@ class DigitalClockViewLayer extends WatchUi.Layer {
         // Update the entire draw layer
         if (_drawBackground) {
             if (color == Graphics.COLOR_BLACK) {
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+                dc.setColor(color, Graphics.COLOR_WHITE);
             } else {
-                dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+                dc.setColor(color, Graphics.COLOR_BLACK);
             } 
             
-            dc.clear(); // fillRectangle(0, 0, dc.getWidth(), dc.getHeight());
+            dc.clear();
 
             if (_wingsImage != null) {
                 dc.drawBitmap(_width / 2 - (_wingsImage.getWidth() / 2), _height / 2 - (_wingsImage.getHeight() / 2), _wingsImage);
             }
         } else {
-            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(color, Graphics.COLOR_TRANSPARENT);
             dc.clear();
         }
 
         var clockTime = System.getClockTime();
         var hourMinString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
-
-        if (color == Graphics.COLOR_BLACK) {
-            color = Graphics.COLOR_WHITE;
-        } else if (color == Graphics.COLOR_WHITE) {
-            color = Graphics.COLOR_BLACK;
-        }
-        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
 
         _datafields.drawDataFields(dc, _width, _height);
 
@@ -84,7 +77,7 @@ class DigitalClockViewLayer extends WatchUi.Layer {
     public function getSecondsView() {
         return new WatchUi.Layer({
             :locX=>_width / 2 - _minorFontWidth,
-            :locY=>_height / 3 + Graphics.getFontHeight(MAJOR_FONT) - 8,
+            :locY=>_height / 3 + Graphics.getFontHeight(MAJOR_FONT) - 15,
             :width=>_minorFontWidth * 2,
             :height=>_minorFontHeight,
             :colorDepth=>8,
@@ -95,11 +88,10 @@ class DigitalClockViewLayer extends WatchUi.Layer {
     //! @param dc Device Context
     public function secondsUpdate(layer as WatchUi.Layer) as Void {
         var dc = layer.getDc();
-        System.println("DigitalClockViewLayer onPartialUpdate()");
+        // System.println("DigitalClockViewLayer onPartialUpdate()");
 
+        dc.setColor(WatchSettings.color, Graphics.COLOR_TRANSPARENT);
         dc.clear();
-        /*dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_GREEN);
-        dc.fillRectangle(0, 0, _width, _height);*/
 
         // Only update the second digit
         var clockTime = System.getClockTime();
