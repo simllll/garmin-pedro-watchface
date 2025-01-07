@@ -267,7 +267,7 @@ class AnalogClockViewLayer extends WatchUi.Layer {
     //! Compute a bounding box from the passed in points
     //! @param points Points to include in bounding box
     //! @return The bounding box points
-    private function getBoundingBox(points as Array< Array<Number or Float> >) as Array< Array<Number or Float> > {
+    private function getBoundingBox(points as Array<[Float, Float]>) as Array<[ Float, Float]> {
         var min = [9999, 9999];
         var max = [0,0];
 
